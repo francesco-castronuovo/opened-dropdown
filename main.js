@@ -1,12 +1,10 @@
-	var Webflow = Webflow || [];
-  Webflow.push(function () {
+var Webflow = Webflow || [];
+Webflow.push(function () {
   
-    const dropdown = document.querySelector('[fc-dropdown = opened]')
-    console.log('Dropdown: ', dropdown)
-    
-  	const dropdownToggle = dropdown.querySelector('.w-dropdown-toggle')
-    console.log('Dropdown Toggle: ', dropdownToggle)
+  const dropdown = document.querySelector('[fc-dropdown = opened]')
+  const dropdownToggle = dropdown.querySelector('.w-dropdown-toggle')
   
-  	dropdownToggle.dispatchEvent(new Event('mousedown'));
-    dropdownToggle.dispatchEvent(new Event('mouseup'));
-  });
+  dropdownToggle.dispatchEvent(new Event('mousedown'));
+  dropdownToggle.dispatchEvent(new Event('mouseup'));
+	
+});
