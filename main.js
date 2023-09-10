@@ -9,8 +9,6 @@ Webflow.push(function () {
     let toggleIdentifiers = []
     for(const toggle of toggles)
       toggleIdentifiers.push(toggle.getAttribute('fc-dropdown-toggle'))
-
-  	console.log(toggleIdentifiers)
   
     for(let i = 0; i < toggleIdentifiers.length; i++)
     {
@@ -19,6 +17,8 @@ Webflow.push(function () {
         const toggleToTrigger = toggles[i]
         toggleToTrigger.dispatchEvent(new Event('mousedown'))
         toggleToTrigger.dispatchEvent(new Event('mouseup'))
+
+        $(toggleToTrigger).trigger('tap');
       }
     }
   }
@@ -29,5 +29,7 @@ Webflow.push(function () {
 
     dropdownToggle.dispatchEvent(new Event('mousedown'));
     dropdownToggle.dispatchEvent(new Event('mouseup'));
+
+    $(dropdownToggle).trigger('tap');
   }
 })
