@@ -10,10 +10,7 @@ Webflow.push(function () {
       const identifier = toggle.getAttribute('fc-dropdown-toggle')
 
       if(sessionStorage['fc-dropdown-toggle'] === identifier)
-      {
-        console.log('true')
         return;
-      }
 
       event.preventDefault()
       sessionStorage['fc-dropdown-toggle'] = identifier
