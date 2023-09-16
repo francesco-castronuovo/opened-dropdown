@@ -1,4 +1,4 @@
-var Webflow = Webflow || [];
+var Webflow = Webflow || []
 Webflow.push(function () {
   
   const identifier = sessionStorage['fc-dropdown-toggle']
@@ -18,18 +18,52 @@ Webflow.push(function () {
         toggleToTrigger.dispatchEvent(new Event('mousedown'))
         toggleToTrigger.dispatchEvent(new Event('mouseup'))
 
-        $(toggleToTrigger).trigger('tap');
+        $(toggleToTrigger).trigger('tap')
       }
     }
   }
   else
   {
-  	const dropdown = document.querySelector('[fc-dropdown = default]')
-    const dropdownToggle = dropdown.querySelector('.w-dropdown-toggle')
+  	const dropdowns = document.querySelectorAll('[fc-dropdown = default]')
+    
+    if(dropdowns.length === 1)
+    {  
+      const dropdown = dropdowns[0]
+      const dropdownToggle = dropdown.querySelector('.w-dropdown-toggle')
 
-    dropdownToggle.dispatchEvent(new Event('mousedown'));
-    dropdownToggle.dispatchEvent(new Event('mouseup'));
+      dropdownToggle.dispatchEvent(new Event('mousedown'))
+      dropdownToggle.dispatchEvent(new Event('mouseup'))
 
-    $(dropdownToggle).trigger('tap');
+      $(dropdownToggle).trigger('tap')
+    }
+    else if(dropdowns.length > 1)
+    {
+    	let options = {
+      	threshold: 0,
+   		}
+      
+      let callback = (entries, observer) => {
+        entries.forEach((entry) => {
+        
+          if(entry.isIntersecting)
+          {
+            const dropdownToggle = entry.target.querySelector('.w-dropdown-toggle')
+            
+            if(!dropdownToggle.classList.contains('w--open'))
+            {
+              dropdownToggle.dispatchEvent(new Event('mousedown'))
+              dropdownToggle.dispatchEvent(new Event('mouseup'))
+
+              $(dropdownToggle).trigger('tap')
+            }
+          }
+        })
+      }
+
+			let observer = new IntersectionObserver(callback, options)
+    
+    	for(const dropdown of dropdowns)
+				observer.observe(dropdown)
+    }
   }
 })
